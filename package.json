@@ -2,14 +2,23 @@
   "name": "tracker-game",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/build",
   "repository": {
     "type": "git",
     "url": "https://github.com/hyerinOh/tracker-game"
   },
   "dependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "firebase": "^5.9.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.4.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "sass-loader": "^7.1.0",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,7 +27,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "airbnb"
   },
   "browserslist": [
     ">0.2%",
