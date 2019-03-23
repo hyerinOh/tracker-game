@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
-import socketio from 'socket.io-client';
+// import firebase from 'firebase';
+// import socketio from 'socket.io-client';
 import {
   BrowserRouter as
   Router,
@@ -9,11 +9,15 @@ import {
 } from 'react-router-dom';
 import SignInPage from './SignInPage';
 import MatchingPage from './MatchingPage';
+import GamePage from './GamePage';
 
 export default class App extends Component {
 constructor(props) {
   super(props);
+  console.log(this.props);
 }
+
+
   render() {
     return (
       <Router>
@@ -28,11 +32,11 @@ constructor(props) {
             path='/matching'
             render={props => <MatchingPage {...props} {...this.props} />}
           />
-          {/* <Route
+          <Route
             exact
             path='/game'
-            render={props => }
-          /> */}
+            render={props => <GamePage {...props} {...this.props} />}
+          />
         </Switch>
       </Router>
     )

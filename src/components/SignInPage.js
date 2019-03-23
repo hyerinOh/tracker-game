@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import socketio from 'socket.io-client';
-import logo from './logo.svg';
+// import socketio from 'socket.io-client';
+// import logo from './logo.svg';
+import background from './screen.png';
 
 export default class SignInPage extends Component {
   constructor (props) {
     super(props);
     
-    this.state = {
-      userInfo: [],
-    };
-
+    // this.state = {
+    //   userInfo: [],
+    // };
     this.auth = this.auth.bind(this);
+
   }
 
   render() {
     return (
       <div className="signIn_wrapper">
-      <img src={logo} />
-        <button className="signInBtn" onClick={this.auth.bind(this)}>Sign in</button>
-        <button onClick={this.logout.bind(this)}>Sign out</button>
+      <img
+        className="mainImage" 
+        src={background}
+      />
+        <button 
+          className="signInBtn"
+          onClick={this.auth.bind(this)}
+        >
+        {/* <img src="./facebook_logo.png" /> */}
+        Log in with Facebook
+        </button>
+        {/* <button onClick={this.logout.bind(this)}>Sign out</button> */}
       </div>
     );
   }
@@ -44,35 +54,27 @@ export default class SignInPage extends Component {
     firebase.auth().signInWithPopup(provider).then((result) => {
       const token = result.credential.accessToken;
       const user = result.user;
-      const userInfo = {};
-      const allUsers = [];
-      const socket = socketio.connect('http://localhost:3001');
+      const currUser = {};
+      currUser.name = user.displayName;
+      currUser.photo = user.photoURL;
+      console.log('Current user', user)
+      this.props.saveCurrUserInfo(currUser);
+      const location = {};
+      this.props.sendUserName(user.displayName);
+      this.props.getAndSaveAllClientsInfo(this.props.userInfo);
+      this.props.history.push('/matching');
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        location.latitude = position.coords.latitude;
+        location.longitude = position.coords.longitude;
+        this.props.sendLocation(location);
+        console.log(position);
+      });
+
+      // geolocation 안 잡힐 경우
+      this.props.sendLocation(location);
+      this.props.getOrder();
       
-      socket.emit('userName', user.displayName);
-      socket.on('all', (all) => {
-        console.log(all)
-        this.props.saveUserInfo(all);
-        this.props.history.push('/matching');
-      })
-      // socket.on('userId', (userId) => {
-      //   socket.emit('userName', user.displayName);
-      //   // if (allUsers.length <= 2) {
-      //   //   userInfo.id = userId;
-      //   //   userInfo.name = user.displayName;
-      //   //   allUsers.push(userInfo);
-      //   //   
-      //   //   
-      //   //   console.log(allUsers);
-      //   // }
-        
-      // });
-      // socket.on('order', (count) => {
-      //   console.log('order', count)
-      // });
-      // socket.on('allClients', (allClients) => {
-      //   console.log('all', allClients);
-      // })
-      // console.log('log in', user);
     }).catch(function(error) {
       const errorCode = error.code;
       const errorMessage = error.message;
