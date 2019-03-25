@@ -3,7 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux';
 import socketio from 'socket.io-client';
 import {
-  Action, GetLocation, getCurrentUserInfo, getRealWinner,
+  Action, GetLocation, getCurrentUserInfo, getRealWinner, tryAgain,
 } from '../actions/action';
 import AppComponent from '../components/App';
 
@@ -25,7 +25,6 @@ class App extends Component {
     return <AppComponent {...this.props} />
   }
 }
-
 const socket = socketio.connect('http://localhost:3001');
 
 const mapStateToProps = (state) => {
@@ -43,8 +42,8 @@ const mapDispatchToProps = (dispatch) => {
     saveCurrUserInfo: (currUserInfo) => {
       dispatch(getCurrentUserInfo(currUserInfo));
     },
-    sendUserName: (userName) => {
-      socket.emit('userName', userName);
+    sendUserName: (userNameAndPhto) => {
+      socket.emit('userName', userNameAndPhto);
     },
     getAndSaveAllClientsInfo: (allClients) => {
       socket.on('all', (all) => {
@@ -68,9 +67,6 @@ const mapDispatchToProps = (dispatch) => {
     distinguishWinner: (who) => {
       dispatch(getRealWinner(who));
     },
-    // onLoadData: (loadingType) => {
-    //   dispatch(LoadingAction(loadingType));
-    // }
   };
 };
 

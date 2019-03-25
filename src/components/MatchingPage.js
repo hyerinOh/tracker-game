@@ -6,38 +6,46 @@ import '../index.css';
 export default class MatchingPage extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.handleStart = this.handleStart.bind(this);
   }
 
-
   handleStart() {
     this.props.history.push('/game');
-    // const socket = socketio.connect('http://localhost:3001');
-    
   }
+  // componentWillReceiveProps() {
+  //   if (this.props.userInfo.length === 2) {
+  //     setTimeout(() => {
+  //       this.props.history.push('/game');
+  //     }, 3000);
+  //   }
+  // }
+
   render() {
-    {
-      return (
-        <div>
+    console.log('matching', this.props);
+    return (
+      <div className="matchingPage_background">
+        <p className="matchingTitle">MATCH!</p>
+        <div className="matchedUser_wrapper">
           {
             this.props.userInfo.length
             ? this.props.userInfo.map((user) => {
               return(
-                <p>{user.name}</p>
-              )
+                <div className="matchedUsers">
+                  <img className="matchedUserPhoto" src={user.photo} alt="userPhoto" />
+                  <p className="matchedUsrName">{user.name}</p>
+                </div>
+              );
             })
             : null
           }
-          <button 
-            type="button"
-            disabled={this.props.userInfo.length === 1}
-            onClick={this.handleStart.bind(this)}
-          > 
-          START! 
-          </button>
         </div>
-      )
-    }
+        <button
+          onClick={this.handleStart}
+          className="startBtn"
+        >
+          start
+        </button>
+      </div>
+    );
   }
 }

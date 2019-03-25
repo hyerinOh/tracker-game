@@ -4,7 +4,7 @@ body{
   justify-content: center;
   width: 640px;
   height: 100vh;
-  margin: 0;
+  margin: 0; 
 }
 #root{
   background: #ffffff;
@@ -73,10 +73,35 @@ body{
   font-size: 40px;
 }
 /* .currUserName{
-  font-size: 30px;
+  padding: 10px;
+  text-shadow:
+    -2px 4px 4px #091243,
+    0 0 10px #00D0FF,
+    inset 1px 1px 1px white;
+  color: #1FFFFF;
+  border: 2px solid;
+  border-radius: 4px;
+  background-color: transparent;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px rgba(0,208,255, 0.6), 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px rgba(0,208,255, 0.6);
 } */
+.given_longitude{
+  width: 100%;
+  font-size: 40px;
+}
+.given_latitude{
+  font-size: 50px;
+  display: inline-block;
+}
 .inputWrapper {
-  display: flex;
+  display: inline-block;
 }
 .quizWrapper{
   position: fixed;
@@ -91,11 +116,11 @@ body{
   transform: translateX(-50%);
   text-align: center;
   background: rgba(1, 1, 1, 0.5);
-  font-size: 40px;
 }
 .firstAnswer{
-  width: 40px;
-  height: 40px;
+  align-items: center;
+  width: 50px;
+  height: 50px;
   border: solid 1px #181818;
   border-radius: 6px;
   font-size: 30px;
@@ -106,12 +131,29 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+.quiz-latitude{
+  
 }
 .submitBtn{
-  border: solid 1px #ffffff;
-  width: 100px;
-  height: 30px;
+  color: #ffffff;
+  border: 2px solid;
+  margin: 35px;
+  width: 60%;
+  height: 50px;
   font-size: 25px;
+  border-radius: 4px;
+  background-color: transparent;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px #ea4189, 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px #ea4189;
 }
 .modal {
   position: fixed;
@@ -127,11 +169,296 @@ body{
   border-radius: 30px;
   position:fixed;
   padding: 30px;
-  background: #ffffff;
-  color: #181818;
-  width: 70%;
-  height: 90%;
+  background: #181818;
+  color: #ffffff;
+  width: 500px;
+  height: 900px;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.matchingPage_background{
+  /* display: flex;
+  justify-content: space-between; */
+  background: #181818;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+}
+.matchingTitle{
+/* font-family: 'Fugaz One', cursive; */
+font-family: 'Faster One', cursive;
+  /* font-family: 'Bungee Shade', cursive; */
+  padding: 180px 0;
+  text-align: center;
+  font-size: 100px;
+  letter-spacing: -10px;
+  background: -webkit-linear-gradient(#ea4189, rgb(149, 246, 100));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.matchedUser_wrapper{
+  padding: 40px;
+  font-family: 'Fugaz One', cursive;
+  display: flex;
+  justify-content: space-between;
+}
+.matchedUsers{
+ 
+  text-align: center;
+}
+.matchedUsrName{
+  font-size: 40px;
+  padding: 20px;
+}
+.matchedUserPhoto{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.loader {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  margin: 0px auto;
+  width: 200px;
+  height:200px;
+}
+
+.circular-loader {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  height: 100%;
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+}
+
+.loader-path {
+  stroke-dasharray: 150,200;
+  stroke-dashoffset: -10;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes color {
+  0% {
+    stroke: yellow;
+  }
+  40% {
+    stroke: #ff0099;
+  }
+  66% {
+    stroke: #ff0000;
+  }
+  80%, 90% {
+    stroke: #ff0000;
+  }
+}
+.startBtn{
+  border:solid 1px #ff0099;
+}
+.timeout-modal{
+  border-radius: 30px;
+  position:fixed;
+  padding: 30px;
+  background: #181818;
+  color: #ffffff;
+  width: 500px;
+  height: 900px;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  z-index: 200;
+}
+.timeout-modal > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.timer_wrapper{
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 20px;
+  position: fixed;
+  width: 100px;
+  height: 30px;
+  font-size: 30px;
+  z-index: 100;
+  text-shadow:
+    -2px 4px 4px #091243,
+    0 0 10px rgb(149, 246, 100),
+    inset 1px 1px 1px white;
+  color: rgb(149, 246, 100);
+  border: 2px solid;
+  border-radius: 25px;
+  background-color: transparent;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px rgb(149, 246, 100), 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px rgb(149, 246, 100)
+
+
+}
+.timeout-notice{
+  font-family: 'Fugaz One', cursive;
+  padding: 100px 0;
+  text-align: center;
+  font-size: 70px;
+  color: rgb(149, 246, 100);
+}
+.backToSignInBtn{
+  font-family: 'Bungee Shade', cursive;
+  text-align: center;
+  font-size: 30px;
+  background: transparent;
+  padding: 20px;
+  text-shadow:
+    -2px 4px 4px #091243,
+    0 0 10px #00D0FF,
+    inset 1px 1px 1px white;
+  color: #1FFFFF;
+  border: 2px solid;
+  border-radius: 4px;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px rgba(0,208,255, 0.6), 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px rgba(0,208,255, 0.6);
+    animation: flickering 5s infinite;
+}
+.closeBtn{
+  font-family: 'Fugaz One', cursive;
+  /* font-family: 'Bungee Shade', cursive; */
+  text-align: center;
+  font-size: 30px;
+  background: transparent;
+  padding: 20px;
+  border: none;
+  text-shadow:
+    -2px 4px 4px #091243,
+    0 0 10px #00D0FF,
+    inset 1px 1px 1px white;
+  color: #1FFFFF;
+  border: 2px solid;
+  border-radius: 4px;
+  background-color: transparent;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0, 0.6), 
+    2px 1px 4px rgba(0,0,0, 0.3), 
+    2px 4px 3px rgba(3,0,128, 0.3), 
+    0 0 7px 2px rgba(0,208,255, 0.6), 
+    inset 0 1px 2px rgba(0,0,0, 0.6), 
+    inset 2px 1px 4px rgba(0,0,0, 0.3), 
+    inset 2px 4px 3px rgba(3,0,128, 0.3), 
+    inset 0 0 7px 2px rgba(0,208,255, 0.6);
+    animation: flickering 5s infinite;
+}
+@keyframes flickering {
+  0% {
+    border-color: transparent;
+    opacity: 0.2;
+  }
+  
+  2% {
+    border-color: #1FFFFF;
+    opacity: 1;
+  }
+  
+  4% {
+    border-color: transparent;
+    opacity: 0.2;
+  }
+  
+  8% {
+    border-color: #1FFFFF;
+    opacity: 1;
+  }
+  
+  28% {
+    border-color: #1FFFFF;
+    opacity: 1;
+  }
+  
+  30% {
+    border-color: transparent;
+    opacity: 0.2;
+  }
+  
+  36% {
+    border-color: #1FFFFF;
+    opacity: 1;
+  }
+  
+  100% {
+    border-color: #1FFFFF;
+    opacity: 1;
+  }
+}
+.upOrDown{
+  font-family: 'Fugaz One', cursive;
+  padding: 100px 0;
+  text-align: center;
+  font-size: 70px;
+  color: rgb(149, 246, 100);
 }

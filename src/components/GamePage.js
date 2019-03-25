@@ -23,7 +23,15 @@ export default class GamePage extends Component {
       isModalOpen: false,
       isCorrectAnswer: false,
       isUpOrDown: '',
+      time: 1000,
+      isTimeout: false,
+      interval: setInterval(() => {
+        this.setState({
+          time: this.state.time - 1
+        });
+      }, 1000)
     };
+    this.onTimeout = this.onTimeout.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +49,13 @@ export default class GamePage extends Component {
     });
   }
 
+  onTimeout() {
+    setInterval(() => {
+      this.setState({
+        time: this.state.time - 1
+      });
+    }, 1000)
+  }
   handleFirst = (e) => {
     if (e.target.value.length <= 1) {
       this.setState({
@@ -108,7 +123,10 @@ export default class GamePage extends Component {
 
   handleClose() {
     this.setState({
-      isModalOpen: false
+      isModalOpen: false,
+      first: '',
+      second: '',
+      third: '',
     });
   }
 
@@ -116,11 +134,30 @@ export default class GamePage extends Component {
     const strLat = this.props.oppLocation.latitude.toString();
     const quizLat = strLat.substring(0, strLat.length - 3);
 
+    if (this.state.time <= 0) {
+      clearInterval(this.state.interval);
+    }
+    
     return (
       <div>
         <div className="currUserWrapper">
           <p className="currUserName">{this.props.currUserInfo.name}</p>
         </div>
+        {
+          <div>
+            <div className="timer_wrapper">
+              <p>{this.state.time} </p>
+            </div>
+
+            <div>
+              {
+                this.state.time === 0
+                ? <Modal {...this.props} isTimeout={true} />
+                : null
+              }
+            </div>
+          </div>
+        }
 
         <ReactMapGL
           mapboxApiAccessToken={ReactMapGL.accessToken}
@@ -138,39 +175,40 @@ export default class GamePage extends Component {
             anchor="bottom"
           />
         </ReactMapGL>
-
         <div className="quizWrapper">
           <div>
-          {
-            <div>
-              <p>{this.props.oppLocation.longitude}</p>
-            </div>
-          }
+          
           {
             <div className="quiz">
-              <p>{quizLat}</p>
-              <div className="inputWrapper">
-                <input
-                  type="text"
-                  className="firstAnswer"
-                  maxLength="1"
-                  ref={(first) => this.first = first}
-                  onChange={this.handleFirst}
-                />
-                <input
-                  type="text"
-                  className="firstAnswer"
-                  maxLength="1"
-                  ref={(second) => this.second = second}
-                  onChange={this.handleSecond}
-                />
-                <input
-                  type="text"
-                  className="firstAnswer"
-                  maxLength="1"
-                  ref={(third) => this.third = third}
-                  onChange={this.handlethird}
-                />
+              <p className="given_longitude">{this.props.oppLocation.longitude}</p>
+              <div className="quiz-latitude">
+                <p className="given_latitude">{quizLat}</p>
+                <div className="inputWrapper">
+                  <input
+                    type="text"
+                    className="firstAnswer"
+                    maxLength="1"
+                    ref={(first) => this.first = first}
+                    value={this.state.first}
+                    onChange={this.handleFirst}
+                  />
+                  <input
+                    type="text"
+                    className="firstAnswer"
+                    maxLength="1"
+                    ref={(second) => this.second = second}
+                    value={this.state.second}
+                    onChange={this.handleSecond}
+                  />
+                  <input
+                    type="text"
+                    className="firstAnswer"
+                    maxLength="1"
+                    ref={(third) => this.third = third}
+                    value={this.state.third}
+                    onChange={this.handlethird}
+                  />
+                </div>
               </div>
             </div>
           }
@@ -180,7 +218,7 @@ export default class GamePage extends Component {
               className="submitBtn"
               onClick={this.distinguishCorrectAnswer.bind(this)}
             >
-              submit
+              Here's my Answer!
             </button>
           </div>
         </div>

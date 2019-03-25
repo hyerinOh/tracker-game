@@ -36,15 +36,17 @@ export default class SignInPage extends Component {
 
   auth() {
     const config = {
-      apiKey: "AIzaSyA0RVxAx1MmDr6leIKl_n0mGt07lTlJyY0",
-      authDomain: "tracker-game.firebaseapp.com",
-      databaseURL: "https://tracker-game.firebaseio.com",
-      projectId: "tracker-game",
-      storageBucket: "tracker-game.appspot.com",
-      messagingSenderId: "439004876954"
+      apiKey: "AIzaSyB73ueN7dSfWwN5hA9vKobhjcRJMbuDeTY",
+      authDomain: "tracker-game2.firebaseapp.com",
+      databaseURL: "https://tracker-game2.firebaseio.com",
+      projectId: "tracker-game2",
+      storageBucket: "tracker-game2.appspot.com",
+      messagingSenderId: "432417324683"
     };
-  
+    
+
     !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
+    
     const provider = new firebase.auth.FacebookAuthProvider();
   
     provider.addScope('email');
@@ -53,6 +55,7 @@ export default class SignInPage extends Component {
   
     firebase.auth().signInWithPopup(provider).then((result) => {
       const token = result.credential.accessToken;
+
       const user = result.user;
       const currUser = {};
       currUser.name = user.displayName;
@@ -60,7 +63,10 @@ export default class SignInPage extends Component {
       console.log('Current user', user)
       this.props.saveCurrUserInfo(currUser);
       const location = {};
-      this.props.sendUserName(user.displayName);
+      const userNameAndPhto = {};
+      userNameAndPhto.name = user.displayName;
+      userNameAndPhto.photo = user.photoURL;
+      this.props.sendUserName(userNameAndPhto);
       this.props.getAndSaveAllClientsInfo(this.props.userInfo);
       this.props.history.push('/matching');
 
@@ -76,6 +82,7 @@ export default class SignInPage extends Component {
       this.props.getOrder();
       
     }).catch(function(error) {
+      console.log(error)
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
