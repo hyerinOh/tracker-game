@@ -7,6 +7,7 @@ export default class Modal extends Component {
   }
 
   backToSignIn() {
+    this.props.resetTarget();
     this.props.history.push('/');
   }
 
@@ -16,16 +17,17 @@ export default class Modal extends Component {
         return (
           <div className="modal display-block">
             <div className="modal-main">
+              <div className="modalForWinner">
+                <p className="foundMessage">You found!</p>
+                <p>:-)</p>
+              </div>
               <button
                 type="button"
-                className="closeBtn"
-                onClick={this.props.handleClose}
+                className="backToSignInBtn"
+                onClick={this.backToSignIn.bind(this)}
               >
-                x
+                Try another game?
               </button>
-              <div>
-                <p>You found!</p>
-              </div>
             </div>
           </div>
         );
@@ -33,16 +35,17 @@ export default class Modal extends Component {
         return (
           <div className="modal display-block">
             <div className="modal-main">
+              <div className="modalForLoser">
+                <p className="foundWinner">{this.props.winner}</p>
+                <p className="wasFoundMessage">found your location :-(</p>
+              </div>
               <button
                 type="button"
-                className="closeBtn"
-                onClick={this.props.handleClose}
+                className="backToSignInBtn"
+                onClick={this.backToSignIn.bind(this)}
               >
-              x
+                Try another game?
               </button>
-              <div>
-                <p>{this.props.winner} found your location</p>
-              </div>
             </div>
           </div>
         );
@@ -56,7 +59,7 @@ export default class Modal extends Component {
                 <p className="upOrDown">{this.props.isUpOrDown}</p>
                 <button
                 type="button"
-                className="closeBtn"
+                className="tryAgainBtn"
                 onClick={this.props.handleClose}
                 >
                   try again
@@ -72,9 +75,9 @@ export default class Modal extends Component {
               <div>
                 <p className="upOrDown">{this.props.isUpOrDown}</p>
                 <button
-                  type="button"
-                  className="closeBtn"
-                  onClick={this.props.handleClose}
+                type="button"
+                className="tryAgainBtn"
+                onClick={this.props.handleClose}
                 >
                   try again
                 </button>

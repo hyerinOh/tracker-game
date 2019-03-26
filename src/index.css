@@ -16,7 +16,6 @@ body{
   width: 640px;
   height: 100vh;
   margin: 0;
-  
 }
 .signInBtn{
   position: fixed;
@@ -29,10 +28,8 @@ body{
   bottom: 10vh;
   left: 50%;
   transform: translateX(-50%);
-
 }
 .signIn_wrapper{
-  /* background: url('/src/screen.png'); */
   position: relative;
   height: 100vh;
 }
@@ -68,30 +65,8 @@ body{
   z-index: 100;
   transform: translateX(-50%);
   text-align: center;
-  /* background: rgba(1,1,1);
-  border: solid 3px rgb(149, 246, 100); */
   font-size: 40px;
 }
-/* .currUserName{
-  padding: 10px;
-  text-shadow:
-    -2px 4px 4px #091243,
-    0 0 10px #00D0FF,
-    inset 1px 1px 1px white;
-  color: #1FFFFF;
-  border: 2px solid;
-  border-radius: 4px;
-  background-color: transparent;
-  box-shadow: 
-    0 1px 2px rgba(0,0,0, 0.6), 
-    2px 1px 4px rgba(0,0,0, 0.3), 
-    2px 4px 3px rgba(3,0,128, 0.3), 
-    0 0 7px 2px rgba(0,208,255, 0.6), 
-    inset 0 1px 2px rgba(0,0,0, 0.6), 
-    inset 2px 1px 4px rgba(0,0,0, 0.3), 
-    inset 2px 4px 3px rgba(3,0,128, 0.3), 
-    inset 0 0 7px 2px rgba(0,208,255, 0.6);
-} */
 .given_longitude{
   width: 100%;
   font-size: 40px;
@@ -133,9 +108,6 @@ body{
   align-items: center;
   flex-wrap: wrap;
 }
-.quiz-latitude{
-  
-}
 .submitBtn{
   color: #ffffff;
   border: 2px solid;
@@ -145,7 +117,7 @@ body{
   font-size: 25px;
   border-radius: 4px;
   background-color: transparent;
-  box-shadow: 
+  /* box-shadow: 
     0 1px 2px rgba(0,0,0, 0.6), 
     2px 1px 4px rgba(0,0,0, 0.3), 
     2px 4px 3px rgba(3,0,128, 0.3), 
@@ -153,7 +125,7 @@ body{
     inset 0 1px 2px rgba(0,0,0, 0.6), 
     inset 2px 1px 4px rgba(0,0,0, 0.3), 
     inset 2px 4px 3px rgba(3,0,128, 0.3), 
-    inset 0 0 7px 2px #ea4189;
+    inset 0 0 7px 2px #ea4189; */
 }
 .modal {
   position: fixed;
@@ -166,13 +138,14 @@ body{
 }
 
 .modal-main {
+  text-align: center;
   border-radius: 30px;
   position:fixed;
   padding: 30px;
-  background: #181818;
+  background: black;
   color: #ffffff;
   width: 500px;
-  height: 900px;
+  height: 520px;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
@@ -180,18 +153,29 @@ body{
   flex-wrap: wrap;
   justify-content: center;
 }
+.closeBtn{
+  position: fixed;
+  right: 0;
+  /* text-align: center; */
+  width: fit-content;
+  height: fit-content;
+  font-size: 40px;
+  padding: 10px;
+  border: solid 1px #ffffff;
+  background: transparent;
+  border-radius: 50%;
+  padding: 10px;
+  color: #ffffff;
+  
+}
 .matchingPage_background{
-  /* display: flex;
-  justify-content: space-between; */
   background: #181818;
   width: 100%;
   height: 100%;
   color: #ffffff;
 }
 .matchingTitle{
-/* font-family: 'Fugaz One', cursive; */
-font-family: 'Faster One', cursive;
-  /* font-family: 'Bungee Shade', cursive; */
+  font-family: 'Faster One', cursive;
   padding: 180px 0;
   text-align: center;
   font-size: 100px;
@@ -207,7 +191,7 @@ font-family: 'Faster One', cursive;
   justify-content: space-between;
 }
 .matchedUsers{
- 
+  position: relative;
   text-align: center;
 }
 .matchedUsrName{
@@ -221,24 +205,23 @@ font-family: 'Faster One', cursive;
 }
 .loader {
   position: absolute;
-  top: 50px;
+  top: 0;
   left: 0;
-  margin: 0px auto;
+  margin: 0;
   width: 200px;
-  height:200px;
+  height: 200px;
 }
 
 .circular-loader {
   -webkit-animation: rotate 2s linear infinite;
-          animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
   height: 100%;
   -webkit-transform-origin: center center;
-      -ms-transform-origin: center center;
-          transform-origin: center center;
+  transform-origin: center center;
   width: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -22px;
+  left: 15px;
   margin: auto;
 }
 
@@ -246,21 +229,21 @@ font-family: 'Faster One', cursive;
   stroke-dasharray: 150,200;
   stroke-dashoffset: -10;
   -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
   stroke-linecap: round;
 }
 
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 @-webkit-keyframes dash {
@@ -328,6 +311,7 @@ font-family: 'Faster One', cursive;
   justify-content: center;
 }
 .timer_wrapper{
+  text-align: center;
   margin-top: 10px;
   margin-left: 20px;
   padding: 20px;
@@ -363,7 +347,24 @@ font-family: 'Faster One', cursive;
   font-size: 70px;
   color: rgb(149, 246, 100);
 }
+.modalForWinner{
+  margin-top: 150px;
+  font-family: 'Fugaz One', cursive;
+  font-size: 60px;
+}
+.modalForLoser{
+  margin-top: 150px;
+  font-family: 'Fugaz One', cursive;
+  font-size: 60px;
+}
+.foundWinner{
+  color: #ff0099;
+  font-family: 'Fugaz One', cursive;
+  font-size: 60px;
+}
 .backToSignInBtn{
+  width: 300px;
+  height: 130px;
   font-family: 'Bungee Shade', cursive;
   text-align: center;
   font-size: 30px;
@@ -387,9 +388,8 @@ font-family: 'Faster One', cursive;
     inset 0 0 7px 2px rgba(0,208,255, 0.6);
     animation: flickering 5s infinite;
 }
-.closeBtn{
+.tryAgainBtn{
   font-family: 'Fugaz One', cursive;
-  /* font-family: 'Bungee Shade', cursive; */
   text-align: center;
   font-size: 30px;
   background: transparent;

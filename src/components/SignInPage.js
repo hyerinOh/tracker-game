@@ -54,32 +54,37 @@ export default class SignInPage extends Component {
     firebase.auth().languageCode = 'ko_KR';
   
     firebase.auth().signInWithPopup(provider).then((result) => {
-      const token = result.credential.accessToken;
-
+      const token = result.credential.accessToken;   
+      console.log('rrrrr', result)   
+     
       const user = result.user;
       const currUser = {};
       currUser.name = user.displayName;
       currUser.photo = user.photoURL;
-      console.log('Current user', user)
       this.props.saveCurrUserInfo(currUser);
       const location = {};
       const userNameAndPhto = {};
       userNameAndPhto.name = user.displayName;
       userNameAndPhto.photo = user.photoURL;
-      this.props.sendUserName(userNameAndPhto);
-      this.props.getAndSaveAllClientsInfo(this.props.userInfo);
+      userNameAndPhto.location = {
+        latitude: 37.184631,
+        longitude: 127.121022
+      }
+     
+      this.props.requestRoom(userNameAndPhto);
+      // this.props.getAndSaveAllClientsInfo(this.props.userInfo);
       this.props.history.push('/matching');
 
       navigator.geolocation.getCurrentPosition((position) => {
         location.latitude = position.coords.latitude;
         location.longitude = position.coords.longitude;
-        this.props.sendLocation(location);
+        // this.props.sendLocation(location);
         console.log(position);
       });
 
       // geolocation 안 잡힐 경우
-      this.props.sendLocation(location);
-      this.props.getOrder();
+      // this.props.sendLocation(location);
+      // this.props.getOrder();
       
     }).catch(function(error) {
       console.log(error)

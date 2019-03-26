@@ -3,6 +3,7 @@ export const initialState = {
   oppLocation: {},
   currUserInfo: {},
   winner: '',
+  target: {},
 };
 
 export default function Reducer(state = initialState, action) {
@@ -13,6 +14,7 @@ export default function Reducer(state = initialState, action) {
     oppLocation,
     currUserInfo,
     winner,
+    target,
   } = action;
 
   switch (type) {
@@ -27,6 +29,9 @@ export default function Reducer(state = initialState, action) {
       return copiedState;
     case 'GET_REAL_WINNER':
       copiedState.winner = winner;
+      return copiedState;
+    case 'GET_TARGET':
+      copiedState.target = target;
       return copiedState;
     default:
       return state;

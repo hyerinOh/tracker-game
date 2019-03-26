@@ -3,7 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux';
 import socketio from 'socket.io-client';
 import {
-  Action, GetLocation, getCurrentUserInfo, getRealWinner, tryAgain,
+  Action, GetLocation, getCurrentUserInfo, getRealWinner, tryAgain, getTarget,
 } from '../actions/action';
 import AppComponent from '../components/App';
 
@@ -34,6 +34,7 @@ const mapStateToProps = (state) => {
     oppLocation: state.oppLocation,
     currUserInfo: state.currUserInfo,
     winner: state.winner,
+    target: state.target,
   };
 };
 
@@ -42,8 +43,8 @@ const mapDispatchToProps = (dispatch) => {
     saveCurrUserInfo: (currUserInfo) => {
       dispatch(getCurrentUserInfo(currUserInfo));
     },
-    sendUserName: (userNameAndPhto) => {
-      socket.emit('userName', userNameAndPhto);
+    requestRoom: (userNameAndPhto) => {
+      socket.emit('requestRoom', userNameAndPhto);
     },
     getAndSaveAllClientsInfo: (allClients) => {
       socket.on('all', (all) => {
@@ -53,11 +54,11 @@ const mapDispatchToProps = (dispatch) => {
     sendLocation: (location) => {
       socket.emit('location', location);
     },
-    getOrder: (order) => {
-      socket.on('order', (count) => {
-        console.log(count);
-      });
-    },
+    // getOrder: (order) => {
+    //   socket.on('order', (count) => {
+    //     console.log(count);
+    //   });
+    // },
     getLocation: (location) => {
       dispatch(GetLocation(location));
     },
@@ -66,6 +67,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     distinguishWinner: (who) => {
       dispatch(getRealWinner(who));
+    },
+    getTarget: () => {
+      socket.on('target', (target) => {
+        console.log('ttttttt', target)
+        dispatch(getTarget(target));
+      });
+    },
+    resetTarget: () => {
+      dispatch(getTarget({}));
     },
   };
 };

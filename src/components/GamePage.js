@@ -13,8 +13,8 @@ export default class GamePage extends Component {
       viewport: {
         width: 640,
         height: 1622,
-        latitude: this.props.oppLocation.latitude,
-        longitude: this.props.oppLocation.longitude,
+        latitude: this.props.target.location.latitude,
+        longitude: this.props.target.location.longitude,
         zoom: 16,
       },
       first: '',
@@ -23,7 +23,7 @@ export default class GamePage extends Component {
       isModalOpen: false,
       isCorrectAnswer: false,
       isUpOrDown: '',
-      time: 1000,
+      time: 180,
       isTimeout: false,
       interval: setInterval(() => {
         this.setState({
@@ -47,6 +47,12 @@ export default class GamePage extends Component {
         this.props.distinguishWinner(who);
       }
     });
+  }
+
+  getTimeLimit(number) {
+    const minute = parseInt(number/60);
+    const second = (number % 60).toString().padStart(2, '0');
+    return minute + ':' + second;
   }
 
   onTimeout() {
@@ -91,7 +97,7 @@ export default class GamePage extends Component {
 
   distinguishCorrectAnswer() {
     const { first, second, third } = this.state;
-    const strLat = this.props.oppLocation.latitude.toString();
+    const strLat = this.props.target.location.latitude.toString();
     const realAnswer = Number(strLat.substring(strLat.length - 3, strLat.length));
 
     if (first && second && third) {
@@ -131,7 +137,7 @@ export default class GamePage extends Component {
   }
 
   render() {
-    const strLat = this.props.oppLocation.latitude.toString();
+    const strLat = this.props.target.location.latitude.toString();
     const quizLat = strLat.substring(0, strLat.length - 3);
 
     if (this.state.time <= 0) {
@@ -146,7 +152,7 @@ export default class GamePage extends Component {
         {
           <div>
             <div className="timer_wrapper">
-              <p>{this.state.time} </p>
+              <p>{this.getTimeLimit(this.state.time)}</p>
             </div>
 
             <div>
@@ -168,10 +174,10 @@ export default class GamePage extends Component {
           mapStyle="mapbox://styles/hyeniniii/cjsudcekl687d1flifo199qck"
         >
           <Marker 
-            key={this.props.oppLocation.name}
+            key={this.props.target.name}
             className="oppMarker"
-            latitude={this.props.oppLocation.latitude}
-            longitude={this.props.oppLocation.longitude}
+            latitude={this.props.target.location.latitude}
+            longitude={this.props.target.location.longitude}
             anchor="bottom"
           />
         </ReactMapGL>
@@ -180,7 +186,7 @@ export default class GamePage extends Component {
           
           {
             <div className="quiz">
-              <p className="given_longitude">{this.props.oppLocation.longitude}</p>
+              <p className="given_longitude">{this.props.target.location.longitude}</p>
               <div className="quiz-latitude">
                 <p className="given_latitude">{quizLat}</p>
                 <div className="inputWrapper">
