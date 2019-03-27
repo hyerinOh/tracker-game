@@ -7,6 +7,7 @@ export default class Modal extends Component {
   }
 
   backToSignIn() {
+    this.props.removeRoom(this.props.target.roomId);
     this.props.resetTarget();
     this.props.history.push('/');
   }

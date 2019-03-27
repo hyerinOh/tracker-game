@@ -16,8 +16,6 @@ class App extends Component {
     const { socket } = this.props;
 
     socket.on('quiz', (opponentLoc) => {
-      console.log('<<<상대방위치>>>>')
-      console.log(opponentLoc);
       this.props.getLocation(opponentLoc);
     });
   }
@@ -46,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
     requestRoom: (userNameAndPhto) => {
       socket.emit('requestRoom', userNameAndPhto);
     },
-    getAndSaveAllClientsInfo: (allClients) => {
+    getAndSaveAllClientsInfo: () => {
       socket.on('all', (all) => {
         dispatch(Action(all));
       });
@@ -76,6 +74,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetTarget: () => {
       dispatch(getTarget({}));
+    },
+    removeRoom: (roomId) => {
+      socket.emit('removeRoom', roomId);
     },
   };
 };

@@ -6,33 +6,26 @@ import '../index.css';
 export default class MatchingPage extends Component {
   constructor(props) {
     super(props);
-    // this.handleStart = this.handleStart.bind(this);
+    this.handleStart = this.handleStart.bind(this);
   }
 
   componentDidMount() {
-    console.log('11111');
-    console.log(this.props)
     this.props.getTarget();
   }
 
-  // handleStart() {
-  //   this.props.history.push('/game');
-  // }
-
-  // componentWillReceiveProps() {
-    
-  // }
+  handleStart() {
+    this.props.history.push('/game');
+  }
 
   render() {
-    console.log('matching', this.props.target);
-    if (this.props.target.name) {
-      setTimeout(() => {
-        this.props.history.push('/game');
-      }, 3000);
-    }
+    // if (this.props.target.name) {
+    //   setTimeout(() => {
+    //     this.props.history.push('/game');
+    //   }, 3000);
+    // }
     return (
       <div className="matchingPage_background">
-        <p className="matchingTitle">MATCH!</p>
+        <p className="matchingTitle">match!</p>
         <div className="matchedUser_wrapper">
           <div className="matchedUsers">
             <div className="loader">
@@ -42,7 +35,8 @@ export default class MatchingPage extends Component {
             </div>
             <img className="matchedUserPhoto" src={this.props.currUserInfo.photo} alt="userPhoto" />
             <p className="matchedUsrName">{this.props.currUserInfo.name}</p>
-            <div>
+          </div>
+          <div className="matchedUsers">
               {
                 this.props.target.name
                   ? (
@@ -59,14 +53,13 @@ export default class MatchingPage extends Component {
                   : null
               } 
             </div>
-          </div>
         </div>
-        {/* <button
+        <button
           onClick={this.handleStart}
           className="startBtn"
         >
           start
-        </button> */}
+        </button>
       </div>
     );
   }

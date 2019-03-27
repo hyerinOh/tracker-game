@@ -13,8 +13,8 @@ export default class GamePage extends Component {
       viewport: {
         width: 640,
         height: 1622,
-        latitude: this.props.target.location.latitude,
-        longitude: this.props.target.location.longitude,
+        latitude: Number(this.props.target.location.latitude) - 0.002,
+        longitude: Number(this.props.target.location.longitude),
         zoom: 16,
       },
       first: '',
@@ -23,7 +23,7 @@ export default class GamePage extends Component {
       isModalOpen: false,
       isCorrectAnswer: false,
       isUpOrDown: '',
-      time: 180,
+      time: 100000,
       isTimeout: false,
       interval: setInterval(() => {
         this.setState({
@@ -62,6 +62,7 @@ export default class GamePage extends Component {
       });
     }, 1000)
   }
+
   handleFirst = (e) => {
     if (e.target.value.length <= 1) {
       this.setState({
@@ -172,12 +173,13 @@ export default class GamePage extends Component {
             this.setState({ viewport: viewports });
           }}
           mapStyle="mapbox://styles/hyeniniii/cjsudcekl687d1flifo199qck"
+
         >
           <Marker 
             key={this.props.target.name}
             className="oppMarker"
-            latitude={this.props.target.location.latitude}
-            longitude={this.props.target.location.longitude}
+            latitude={Number(this.props.target.location.latitude)}
+            longitude={Number(this.props.target.location.longitude)}
             anchor="bottom"
           />
         </ReactMapGL>
@@ -189,42 +191,50 @@ export default class GamePage extends Component {
               <p className="given_longitude">{this.props.target.location.longitude}</p>
               <div className="quiz-latitude">
                 <p className="given_latitude">{quizLat}</p>
-                <div className="inputWrapper">
+                <div className="answer-box">
                   <input
                     type="text"
-                    className="firstAnswer"
+                    className="answer"
                     maxLength="1"
                     ref={(first) => this.first = first}
                     value={this.state.first}
                     onChange={this.handleFirst}
                   />
+                  <div className="bubbly" />
+                </div>
+                <div className="answer-box">
                   <input
                     type="text"
-                    className="firstAnswer"
+                    className="answer"
                     maxLength="1"
                     ref={(second) => this.second = second}
                     value={this.state.second}
                     onChange={this.handleSecond}
                   />
+                  <div className="bubbly" />
+                </div>
+                <div className="answer-box">
                   <input
                     type="text"
-                    className="firstAnswer"
+                    className="answer"
                     maxLength="1"
                     ref={(third) => this.third = third}
                     value={this.state.third}
                     onChange={this.handlethird}
                   />
+                  <div className="bubbly" />
                 </div>
+                
               </div>
             </div>
           }
             <button
               type="submit"
               value="Submit"
-              className="submitBtn"
+              className="submitBtn bubbly-button"
               onClick={this.distinguishCorrectAnswer.bind(this)}
             >
-              Here's my Answer!
+              submit
             </button>
           </div>
         </div>
