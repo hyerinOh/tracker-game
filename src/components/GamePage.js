@@ -8,7 +8,7 @@ export default class GamePage extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-
+    const { location } = this.props;
     this.state = {
       viewport: {
         width: 640,
@@ -173,7 +173,6 @@ export default class GamePage extends Component {
             this.setState({ viewport: viewports });
           }}
           mapStyle="mapbox://styles/hyeniniii/cjsudcekl687d1flifo199qck"
-
         >
           <Marker 
             key={this.props.target.name}
@@ -181,11 +180,12 @@ export default class GamePage extends Component {
             latitude={Number(this.props.target.location.latitude)}
             longitude={Number(this.props.target.location.longitude)}
             anchor="bottom"
-          />
+          >
+          {/* <img src={this.props.target.photo} /> */}
+          </Marker>
         </ReactMapGL>
         <div className="quizWrapper">
           <div>
-          
           {
             <div className="quiz">
               <p className="given_longitude">{this.props.target.location.longitude}</p>

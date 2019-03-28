@@ -24,7 +24,7 @@ class App extends Component {
   }
 }
 const socket = socketio.connect('http://localhost:3001');
-
+// 192.168.0.53
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
