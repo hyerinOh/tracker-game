@@ -57,7 +57,9 @@ export default class Modal extends Component {
           <div className="modal display-block">
             <div className="modal-main">
               <div>
-                <p className="upOrDown">{this.props.isUpOrDown}</p>
+                <section className="rainbow">
+                  <p className="text">{this.props.isUpOrDown}</p>
+                </section>
                 <button
                 type="button"
                 className="tryAgainBtn"
@@ -74,7 +76,9 @@ export default class Modal extends Component {
           <div className="modal display-block">
             <div className="modal-main">
               <div>
-                <p className="upOrDown">{this.props.isUpOrDown}</p>
+                <section className="rainbow">
+                  <p className="text">{this.props.isUpOrDown}</p>
+                </section>
                 <button
                 type="button"
                 className="tryAgainBtn"

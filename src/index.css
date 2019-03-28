@@ -391,11 +391,14 @@ body{
     animation: flickering 5s infinite; */
 }
 .tryAgainBtn{
+  width: 400px;
+  font-family: 'Porter';
+  margin-top: 150px;
   text-align: center;
-  font-size: 30px;
+  font-size: 50px;
   background: transparent;
   padding: 20px;
-  /* text-shadow:
+  text-shadow:
     -2px 4px 4px #091243,
     0 0 10px #00D0FF,
     inset 1px 1px 1px white;
@@ -412,9 +415,9 @@ body{
     inset 2px 1px 4px rgba(0,0,0, 0.3), 
     inset 2px 4px 3px rgba(3,0,128, 0.3), 
     inset 0 0 7px 2px rgba(0,208,255, 0.6);
-    animation: flickering 5s infinite; */
+    animation: flickering 5s infinite;
 }
-/* @keyframes flickering {
+@keyframes flickering {
   0% {
     border-color: transparent;
     opacity: 0.2;
@@ -454,14 +457,48 @@ body{
     border-color: #1FFFFF;
     opacity: 1;
   }
-} */
-.upOrDown{
+}
+/* .text{
   
   padding: 100px 0;
   text-align: center;
   font-size: 70px;
   color: rgb(149, 246, 100);
+} */
+.text {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 8rem;
+  z-index: 10;
 }
+
+.rainbow {
+  padding: 3.125rem;
+}
+.rainbow .text {
+  color: #ff0081;
+  font-family: 'Porter';
+  line-height: 6rem;
+  -webkit-transform: skew(-5.5deg);
+          transform: skew(-5.5deg);
+  text-shadow: -1px -1px white, 1px -1px white, -1px 1px white, 1px 1px white, -5px -5px #dc5277, -6px -6px white, -4px -4px white, -6px -4px white, -4px -6px white, -10px -10px #ca7b72, -11px -11px white, -9px -9px white, -11px -9px white, -9px -11px white, -15px -15px #a7cd69, -16px -16px white, -14px -14px white, -16px -14px white, -14px -16px white, -20px -20px #95f664, -21px -21px white, -19px -19px white, -21px -19px white, -19px -21px white, 9px 0px white, 8px 1px white, 7px 2px white, 7px 3px white, 6px 4px white, -6px 2px white, 6px 6px white, 0px 6px white, -6px 6px white, -6px 0px white, -10px -10px white, -12px -23px white, -9px -20px white, -6px -18px white, -2px -14px white, 2px -10px white, 5px -7px white, 7px -3px white, -20px -14px white, -2px -14px white, -17px -26px white, -20px -26px white, -12px -20px white, -27px -23px white, -26px -20px white, -25px -18px white, -24px -17px white, -24px -15px white, -22px -13px white, -20px -10px white, -18px -8px white, -16px -7px white, -15px -3px white, 2px 2px 22px black, -22px -22px 22px black, -18px -12px 22px black, -5px -15px 22px black;
+  -webkit-animation: scrunch 0.3s ease 0.1s both;
+          animation: scrunch 0.3s ease 0.1s both;
+}
+
+@-webkit-keyframes scrunch {
+  0% {
+    text-shadow: -1px -1px black, 1px -1px black, -1px 1px black, 1px 1px black, -2px -2px #dc5277, -4px -4px #ca7b72, -15px -15px #a7cd69, -20px -20px #95f664;
+  }
+}
+
+@keyframes scrunch {
+  0% {
+    text-shadow: -1px -1px black, 1px -1px black, -1px 1px black, 1px 1px black, -2px -2px #dc5277, -4px -4px #ca7b72, -15px -15px #a7cd69, -20px -20px #95f664;
+  }
+}
+
 
 .answer-box {
   position: relative;
