@@ -125,6 +125,8 @@ export default class GamePage extends Component {
           })
         }
       }
+    } else if (first.length === 0 || second.length === 0 || third.length === 0) {
+      alert('write answers!')
     }
   }
 
