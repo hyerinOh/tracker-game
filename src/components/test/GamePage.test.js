@@ -37,7 +37,7 @@ describe('<GamePage />', () => {
     wrapper.find('.answer').at(0).simulate('change', mockEvent);
     wrapper.find('.answer').at(1).simulate('change', mockEvent);
     wrapper.find('.answer').at(2).simulate('change', mockEvent);
-    console.log(wrapper.find('.answer').at(0).props().value.length); // 1
+    // console.log(wrapper.find('.answer').at(0).props().value.length); // 1
 
     wrapper.instance().handleFirst = jest.fn();
     wrapper.instance().handleSecond = jest.fn();
@@ -52,4 +52,57 @@ describe('<GamePage />', () => {
     expect(wrapper.instance().handleThird).toBeCalledWith('1');
   });
 
+  it('should open modal when the answer is submitted', () => {
+    const mockEvent = { target: { value: '1' } };
+
+    wrapper.find('.answer').at(0).simulate('change', mockEvent);
+    wrapper.find('.answer').at(1).simulate('change', mockEvent);
+    wrapper.find('.answer').at(2).simulate('change', mockEvent);
+    expect(wrapper.find('.answer').at(0).length).toEqual(1);
+    expect(wrapper.find('.answer').at(1).length).toEqual(1);
+    expect(wrapper.find('.answer').at(2).length).toEqual(1);
+    expect(wrapper.find('Modal').length).toBe(0);
+    wrapper.find('.submitBtn').simulate('click');
+    wrapper.instance().distinguishCorrectAnswer = jest.fn();
+    wrapper.instance().forceUpdate();
+
+
+    expect(wrapper.state('isModalOpen')).toBeTruthy();
+    expect(wrapper.find('Modal').length).toBe(1);
+  });
+
+  it('should check if answers are true or false', () => {
+    // up일 때
+    wrapper.setState({
+      first: '1',
+      second: '2',
+      third: '3',
+    });
+    wrapper.find('.submitBtn').simulate('click');
+    expect(wrapper.state().isCorrectAnswer).toBeFalsy();
+    expect(wrapper.state().isUpOrDown).toEqual('Up');
+    expect(wrapper.state().isModalOpen).toBeTruthy();
+
+    // down일 때
+    wrapper.setState({
+      first: '5',
+      second: '5',
+      third: '5',
+    });
+    wrapper.find('.submitBtn').simulate('click');
+    expect(wrapper.state().isCorrectAnswer).toBeFalsy();
+    expect(wrapper.state().isUpOrDown).toEqual('Down');
+    expect(wrapper.state().isModalOpen).toBeTruthy();
+
+    // 정답일 때
+    wrapper.setState({
+      first: '2',
+      second: '8',
+      third: '2',
+    });
+
+    wrapper.find('.submitBtn').simulate('click');
+    expect(wrapper.state().isCorrectAnswer).toBeTruthy();
+    expect(wrapper.state().isModalOpen).toBeTruthy();
+  });
 });

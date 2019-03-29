@@ -9,24 +9,6 @@ export default class SignInPage extends Component {
     this.auth = this.auth.bind(this);
   }
 
-  render() {
-    return (
-      <div className="signIn_wrapper">
-        <img
-          className="mainImage" 
-          src={background}
-        />
-        <button 
-          className="signInBtn"
-          onClick={this.auth.bind(this)}
-        >
-        {/* <img src="./facebook_logo.png" /> */}
-        Log in with Facebook
-        </button>
-      </div>
-    );
-  }
-
   auth() {
     const config = {
       apiKey: "AIzaSyB73ueN7dSfWwN5hA9vKobhjcRJMbuDeTY",
@@ -36,18 +18,18 @@ export default class SignInPage extends Component {
       storageBucket: "tracker-game2.appspot.com",
       messagingSenderId: "432417324683"
     };
-    
 
     !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
-    
+
     const provider = new firebase.auth.FacebookAuthProvider();
-  
+
     provider.addScope('email');
-  
+
     firebase.auth().languageCode = 'ko_KR';
-  
+
     firebase.auth().signInWithPopup(provider).then((result) => {
-      const token = result.credential.accessToken;   
+      alert('로그인')
+      const token = result.credential.accessToken;  
       // geolocation 안 될 때
 
       // const user = result.user;
@@ -63,52 +45,47 @@ export default class SignInPage extends Component {
       //   latitude: 37.184631,
       //   longitude: 127.121022
       // }
-     
+
       // this.props.requestRoom(userNameAndPhto);
       // this.props.history.push('/matching');
 
       navigator.geolocation.getCurrentPosition((position) => {
-        // location.latitude = position.coords.latitude;
-        // location.longitude = position.coords.longitude;
-        // this.props.sendLocation(location);
         const user = result.user;
         const currUser = {};
-        currUser.name = user.displayName;
-        currUser.photo = user.photoURL;
-        this.props.saveCurrUserInfo(currUser);
+        const { saveCurrUserInfo, requestRoom, history } = this.props;
         const userNameAndPhto = {};
-        userNameAndPhto.name = user.displayName;
-        userNameAndPhto.photo = user.photoURL;
-        console.log(position.coords.latitude)
         const currLatitude = position.coords.latitude.toFixed(6);
         const currLongitude = position.coords.longitude.toFixed(6);
+
+        currUser.name = user.displayName;
+        currUser.photo = user.photoURL;
+        saveCurrUserInfo(currUser);
+        userNameAndPhto.name = user.displayName;
+        userNameAndPhto.photo = user.photoURL;
         userNameAndPhto.location = {
           latitude: currLatitude,
-          longitude: currLongitude
-        }
-        this.props.requestRoom(userNameAndPhto);
-        this.props.history.push('/matching');
+          longitude: currLongitude,
+        };
+        requestRoom(userNameAndPhto);
+        history.push('/matching');
       });
 
       // geolocation 안 잡힐 경우
       // this.props.sendLocation(location);
       // this.props.getOrder();
-      
-    }).catch(function(error) {
-      console.log(error)
+    }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
       const credential = error.credential;
     });
-  
-    firebase.auth().getRedirectResult().then(function(result) {
+
+    firebase.auth().getRedirectResult().then((result) => {
       if (result.credential) {
         var token = result.credential.accessToken;
-        console.log(token);
       }
       const user = result.user;
-    }).catch(function(error) {
+    }).catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
       var email = error.email;
@@ -116,11 +93,20 @@ export default class SignInPage extends Component {
     });
   }
 
-  logout = () => {
-    firebase.auth().signOut().then(function() {
-      console.log('logout');
-    }).catch(function(error) {
-      console.log(error)
-    });
+  render() {
+    return (
+      <div className="signIn_wrapper">
+        <img
+          className="mainImage" 
+          src={background}
+        />
+        <button 
+          className="signInBtn"
+          onClick={this.auth.bind(this)}
+        >
+          Log in with Facebook
+        </button>
+      </div>
+    );
   }
 }

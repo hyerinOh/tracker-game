@@ -6,14 +6,21 @@ export default class Modal extends Component {
   }
 
   backToSignIn() {
-    this.props.removeRoom(this.props.target.roomId);
-    this.props.resetTarget();
-    this.props.history.push('/');
+    const {
+      removeRoom, resetTarget, history, target
+    } = this.props;
+    removeRoom(target.roomId);
+    resetTarget();
+    history.push('/');
   }
 
   render() {
-    if (this.props.isCorrectAnswer) {
-      if (this.props.winner === this.props.currUserInfo.name) {
+    const {
+      isCorrectAnswer, winner, currUserInfo, isUpOrDown, handleClose, isTimeout
+    } = this.props;
+
+    if (isCorrectAnswer) {
+      if (winner === currUserInfo.name) {
         return (
           <div className="modal display-block">
             <div className="modal-main">
@@ -36,7 +43,7 @@ export default class Modal extends Component {
           <div className="modal display-block">
             <div className="modal-main">
               <div className="modalForLoser">
-                <p className="foundWinner">{this.props.winner}</p>
+                <p className="foundWinner">{winner}</p>
                 <p className="wasFoundMessage">found your location :-(</p>
               </div>
               <button
@@ -51,18 +58,18 @@ export default class Modal extends Component {
         );
       }
     } else {
-      if(this.props.isUpOrDown === 'Up') {
+      if(isUpOrDown === 'Up') {
         return (
           <div className="modal display-block">
             <div className="modal-main">
               <div>
                 <section className="rainbow">
-                  <p className="text">{this.props.isUpOrDown}</p>
+                  <p className="text">{isUpOrDown}</p>
                 </section>
                 <button
                 type="button"
                 className="tryAgainBtn"
-                onClick={this.props.handleClose}
+                onClick={handleClose}
                 >
                   try again
                 </button>
@@ -70,18 +77,18 @@ export default class Modal extends Component {
             </div>
           </div>
         );
-      } else if (this.props.isUpOrDown === 'Down') {
+      } else if (isUpOrDown === 'Down') {
         return (
           <div className="modal display-block">
             <div className="modal-main">
               <div>
                 <section className="rainbow">
-                  <p className="text">{this.props.isUpOrDown}</p>
+                  <p className="text">{isUpOrDown}</p>
                 </section>
                 <button
                 type="button"
                 className="tryAgainBtn"
-                onClick={this.props.handleClose}
+                onClick={handleClose}
                 >
                   try again
                 </button>
@@ -89,7 +96,7 @@ export default class Modal extends Component {
             </div>
           </div>
         );
-      } else if (this.props.isTimeout) {
+      } else if (isTimeout) {
         return (
           <div className="modal display-block">
             <div className="timeout-modal">

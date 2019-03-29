@@ -7,14 +7,15 @@ ReactMapGL.accessToken = 'pk.eyJ1IjoiaHllbmluaWlpIiwiYSI6ImNqcWtubmw2dTZvM2Q0MnV
 export default class GamePage extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    const { location } = this.props;
+    console.log(props)
+    const { target } = this.props;
+    
     this.state = {
       viewport: {
         width: 640,
         height: 1622,
-        latitude: Number(this.props.target.location.latitude) - 0.002,
-        longitude: Number(this.props.target.location.longitude),
+        latitude: Number(target.location.latitude) - 0.002,
+        longitude: Number(target.location.longitude),
         zoom: 16,
       },
       first: '',
@@ -31,21 +32,22 @@ export default class GamePage extends Component {
         });
       }, 1000)
     };
+
     this.onTimeout = this.onTimeout.bind(this);
   }
 
   componentDidMount() {
-    const { socket } = this.props;
+    const { socket, distinguishWinner } = this.props;
     const { isModalOpen } = this.state;
 
-    if(socket) {
+    if (socket) {
       socket.on('who', (who) => {
         if (!isModalOpen) {
           this.setState({
             isModalOpen: true,
             isCorrectAnswer: true
           });
-          this.props.distinguishWinner(who);
+          distinguishWinner(who);
         }
       });
     }
@@ -54,13 +56,16 @@ export default class GamePage extends Component {
   getTimeLimit(number) {
     const minute = parseInt(number/60);
     const second = (number % 60).toString().padStart(2, '0');
+
     return minute + ':' + second;
   }
 
   onTimeout() {
+    const { time } = this.state;
+
     setInterval(() => {
       this.setState({
-        time: this.state.time - 1
+        time: time - 1
       });
     }, 1000)
   }
@@ -100,18 +105,20 @@ export default class GamePage extends Component {
 
   distinguishCorrectAnswer() {
     const { first, second, third } = this.state;
-    const strLat = this.props.target.location.latitude.toString();
+    const { target, getWinner, currUserInfo, distinguishWinner } = this.props;
+    const strLat = target.location.latitude.toString();
     const realAnswer = Number(strLat.substring(strLat.length - 3, strLat.length));
 
     if (first && second && third) {
       const answer = Number([first, second, third].join(''));
+
       if (answer === realAnswer) {
         this.setState({
           isCorrectAnswer: true,
           isModalOpen: true,
-        })
-        this.props.getWinner(this.props.currUserInfo.name);
-        this.props.distinguishWinner(this.props.currUserInfo.name);
+        });
+        getWinner(currUserInfo.name);
+        distinguishWinner(currUserInfo.name);
       } else {
         if (answer < realAnswer) {
           this.setState({
@@ -124,7 +131,7 @@ export default class GamePage extends Component {
             isCorrectAnswer: false,
             isUpOrDown: 'Down',
             isModalOpen: true,
-          })
+          });
         }
       }
     } else if (first.length === 0 || second.length === 0 || third.length === 0) {
@@ -142,35 +149,36 @@ export default class GamePage extends Component {
   }
 
   render() {
-    
-    const strLat = this.props.target.location.latitude.toString();
+    const { target, currUserInfo } = this.props;
+    const {
+      time, interval, first, second, third, isModalOpen, isCorrectAnswer, isUpOrDown,
+    } = this.state;
+    const strLat = target.location.latitude.toString();
     const quizLat = strLat.substring(0, strLat.length - 3);
 
-    if (this.state.time <= 0) {
-      clearInterval(this.state.interval);
+    if (time <= 0) {
+      clearInterval(interval);
     }
     
     return (
       <div>
         <div className="currUserWrapper">
-          <p className="currUserName">{this.props.currUserInfo.name}</p>
+          <p className="currUserName">{currUserInfo.name}</p>
         </div>
         {
           <div>
             <div className="timer_wrapper">
-              <p>{this.getTimeLimit(this.state.time)}</p>
+              <p>{this.getTimeLimit(time)}</p>
             </div>
-
             <div>
               {
-                this.state.time === 0
+                time === 0
                 ? <Modal {...this.props} isTimeout={true} />
                 : null
               }
             </div>
           </div>
         }
-
         <ReactMapGL
           mapboxApiAccessToken={ReactMapGL.accessToken}
           {...this.state.viewport}
@@ -180,20 +188,19 @@ export default class GamePage extends Component {
           mapStyle="mapbox://styles/hyeniniii/cjsudcekl687d1flifo199qck"
         >
           <Marker 
-            key={this.props.target.name}
+            key={target.name}
             className="oppMarker"
-            latitude={Number(this.props.target.location.latitude)}
-            longitude={Number(this.props.target.location.longitude)}
+            latitude={Number(target.location.latitude)}
+            longitude={Number(target.location.longitude)}
             anchor="bottom"
           >
-          {/* <img src={this.props.target.photo} /> */}
           </Marker>
         </ReactMapGL>
         <div className="quizWrapper">
           <div>
           {
             <div className="quiz">
-              <p className="given_longitude">{this.props.target.location.longitude}</p>
+              <p className="given_longitude">{target.location.longitude}</p>
               <div className="quiz-latitude">
                 <p className="given_latitude">{quizLat}</p>
                 <div className="answer-box">
@@ -202,7 +209,7 @@ export default class GamePage extends Component {
                     className="answer"
                     maxLength="1"
                     ref={(first) => this.first = first}
-                    value={this.state.first}
+                    value={first}
                     onChange={this.handleFirst}
                   />
                   <div className="bubbly" />
@@ -213,7 +220,7 @@ export default class GamePage extends Component {
                     className="answer"
                     maxLength="1"
                     ref={(second) => this.second = second}
-                    value={this.state.second}
+                    value={second}
                     onChange={this.handleSecond}
                   />
                   <div className="bubbly" />
@@ -224,12 +231,11 @@ export default class GamePage extends Component {
                     className="answer"
                     maxLength="1"
                     ref={(third) => this.third = third}
-                    value={this.state.third}
+                    value={third}
                     onChange={this.handlethird}
                   />
                   <div className="bubbly" />
                 </div>
-                
               </div>
             </div>
           }
@@ -244,8 +250,12 @@ export default class GamePage extends Component {
           </div>
         </div>
         {
-          this.state.isModalOpen
-            ? <Modal {...this.props} isCorrectAnswer={this.state.isCorrectAnswer} isUpOrDown={this.state.isUpOrDown} handleClose={this.handleClose.bind(this)}/>
+          isModalOpen
+            ? <Modal {...this.props}
+                isCorrectAnswer={isCorrectAnswer}
+                isUpOrDown={isUpOrDown}
+                handleClose={this.handleClose.bind(this)}
+              />
             : null
         }
       </div>
