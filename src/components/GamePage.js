@@ -38,15 +38,17 @@ export default class GamePage extends Component {
     const { socket } = this.props;
     const { isModalOpen } = this.state;
 
-    socket.on('who', (who) => {
-      if (!isModalOpen) {
-        this.setState({
-          isModalOpen: true,
-          isCorrectAnswer: true
-        });
-        this.props.distinguishWinner(who);
-      }
-    });
+    if(socket) {
+      socket.on('who', (who) => {
+        if (!isModalOpen) {
+          this.setState({
+            isModalOpen: true,
+            isCorrectAnswer: true
+          });
+          this.props.distinguishWinner(who);
+        }
+      });
+    }
   }
 
   getTimeLimit(number) {
@@ -140,6 +142,7 @@ export default class GamePage extends Component {
   }
 
   render() {
+    
     const strLat = this.props.target.location.latitude.toString();
     const quizLat = strLat.substring(0, strLat.length - 3);
 

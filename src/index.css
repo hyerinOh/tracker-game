@@ -354,11 +354,10 @@ body{
   color: rgb(149, 246, 100);
 }
 .modalForWinner{
-  margin-top: 150px;
+  margin-top: 80px;
   font-size: 60px;
 }
 .modalForLoser{
-  margin-top: 150px;
   font-size: 60px;
 }
 .foundWinner{
@@ -371,7 +370,7 @@ body{
   text-align: center;
   font-size: 30px;
   background: transparent;
-  /* padding: 20px;
+  padding: 20px;
   text-shadow:
     -2px 4px 4px #091243,
     0 0 10px #00D0FF,
@@ -388,7 +387,7 @@ body{
     inset 2px 1px 4px rgba(0,0,0, 0.3), 
     inset 2px 4px 3px rgba(3,0,128, 0.3), 
     inset 0 0 7px 2px rgba(0,208,255, 0.6);
-    animation: flickering 5s infinite; */
+    animation: flickering 5s infinite;
 }
 .tryAgainBtn{
   width: 400px;

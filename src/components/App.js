@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
-// import firebase from 'firebase';
-// import socketio from 'socket.io-client';
+
 import {
   BrowserRouter as
   Router,
@@ -15,7 +14,6 @@ import backgroundMusic from './backgroundMusic.wav';
 export default class App extends Component {
 constructor(props) {
   super(props);
-  console.log(this.props);
 }
 
   render() {

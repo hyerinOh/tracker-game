@@ -6,6 +6,7 @@ import '../index.css';
 export default class MatchingPage extends Component {
   constructor(props) {
     super(props);
+
     this.handleStart = this.handleStart.bind(this);
   }
 
@@ -13,6 +14,7 @@ export default class MatchingPage extends Component {
     this.props.getTarget();
   }
 
+  // 버튼 없애고 setTimeout하기
   handleStart() {
     this.props.history.push('/game');
   }
@@ -30,7 +32,7 @@ export default class MatchingPage extends Component {
           <div className="matchedUsers">
             <div className="loader">
               <svg className="circular-loader"viewBox="25 25 50 50" >
-                <circle className="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#ff7754" stroke-width="2" />
+                <circle className="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#ff7754" strokeWidth="2" />
               </svg>
             </div>
             <img className="matchedUserPhoto" src={this.props.currUserInfo.photo} alt="userPhoto" />
@@ -43,7 +45,7 @@ export default class MatchingPage extends Component {
                     <div>
                       <div className="loader">
                         <svg className="circular-loader"viewBox="25 25 50 50" >
-                          <circle className="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#ff7754" stroke-width="2" />
+                          <circle className="loader-path" cx="50" cy="50" r="20" fill="none" stroke="#ff7754" strokeWidth="2" />
                         </svg>
                       </div>
                       <img className="matchedUserPhoto" src={this.props.target.photo} alt="userPhoto" />
