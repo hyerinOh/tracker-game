@@ -18,7 +18,7 @@ export default class MatchingPage extends Component {
     if (target.name) {
       setTimeout(() => {
         history.push('/game');
-      }, 3000);
+      }, 10000);
     }
     return (
       <div className="matchingPage_background">

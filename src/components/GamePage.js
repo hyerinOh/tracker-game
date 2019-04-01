@@ -9,7 +9,6 @@ export default class GamePage extends Component {
     super(props);
 
     const { target } = this.props;
-    const { time } = this.state;
     this.state = {
       viewport: {
         width: 640,
@@ -28,7 +27,7 @@ export default class GamePage extends Component {
       isTimeout: false,
       interval: setInterval(() => {
         this.setState({
-          time: time - 1
+          time: this.state.time - 1
         });
       }, 1000)
     };

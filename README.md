@@ -1,7 +1,9 @@
 # 여기없대
 # Introduction
 
-**여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다.
+**여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다. 
+만약 정답이 사용자가 입력한 값 보다 큰 숫자일 경우 'UP' 팝업이, 작을 경우 'DOWN' 팝업이 띄워지게 되며, 주어진 시간 안에 답을 맞추지 못할 경우 'Time out' 팝업이 띄워지게 됩니다. 상대방이 정답을 맞췄다면 'OO(상대방 이름) found your location' 팝업이 띄워지며, 맞춘 사용자에게는 'You found' 팝업이 띄워지게 됩니다.
+![Screenshot 2019-04-02 at 01 21 22](https://user-images.githubusercontent.com/38285577/55343236-a7256300-54e5-11e9-9d8b-782bac1fca74.png)
 
 ## Requirements
 - Facebook 가입이 선행되어야 합니다.
@@ -50,3 +52,30 @@ npm start
 ## Version control
 - client, server의 독립적인 관리를 위한 GIT Repo 구분
 - Branch, Pull Request 기반 개발 진행
+
+## Images
+### Sign In Page
+![Screenshot 2019-04-02 at 01 21 22](https://user-images.githubusercontent.com/38285577/55343236-a7256300-54e5-11e9-9d8b-782bac1fca74.png)
+
+### Matching Page
+![Screenshot 2019-04-02 at 01 26 10](https://user-images.githubusercontent.com/38285577/55343644-7bef4380-54e6-11e9-8d46-f08fe20a85d2.png)
+
+### Game Page
+![Screenshot 2019-04-02 at 01 26 48](https://user-images.githubusercontent.com/38285577/55343775-bc4ec180-54e6-11e9-8668-b72a349bf962.png)
+
+- 정답보다 클 경우
+![Screenshot 2019-04-02 at 01 30 34](https://user-images.githubusercontent.com/38285577/55343903-0cc61f00-54e7-11e9-8564-0ec357ffd342.png)
+
+- 정답보다 작을 경우
+![Screenshot 2019-04-02 at 01 30 46](https://user-images.githubusercontent.com/38285577/55344193-bad1c900-54e7-11e9-9358-259cf0b4b79d.png)
+
+- 시간이 초과 되었을 경우
+![Screenshot 2019-04-02 at 01 36 48](https://user-images.githubusercontent.com/38285577/55344239-d3da7a00-54e7-11e9-9971-24ed25e6f06b.png)
+
+- 정답을 맞췄을 경우
+![Screenshot 2019-04-02 at 01 38 45](https://user-images.githubusercontent.com/38285577/55344386-1f8d2380-54e8-11e9-820c-cb9b35154869.png)
+
+![Screenshot 2019-04-02 at 01 38 59](https://user-images.githubusercontent.com/38285577/55344398-2b78e580-54e8-11e9-88f8-40f9ec587094.png)
+
+
+
