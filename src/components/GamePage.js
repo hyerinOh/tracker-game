@@ -24,7 +24,7 @@ export default class GamePage extends Component {
       isModalOpen: false,
       isCorrectAnswer: false,
       isUpOrDown: '',
-      time: 100000,
+      time: 240,
       isTimeout: false,
       interval: setInterval(() => {
         this.setState({
@@ -168,7 +168,7 @@ export default class GamePage extends Component {
         {
           <div>
             <div className="timer_wrapper">
-              <p>{this.getTimeLimit(time)}</p>
+              <p className="timer">{this.getTimeLimit(time)}</p>
             </div>
             <div>
               {

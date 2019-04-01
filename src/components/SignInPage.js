@@ -28,7 +28,6 @@ export default class SignInPage extends Component {
     firebase.auth().languageCode = 'ko_KR';
 
     firebase.auth().signInWithPopup(provider).then((result) => {
-      alert('로그인')
       const token = result.credential.accessToken;  
       // geolocation 안 될 때
 

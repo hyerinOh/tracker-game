@@ -3,7 +3,7 @@ import '../App.css';
 import { connect } from 'react-redux';
 import socketio from 'socket.io-client';
 import {
-  Action, GetLocation, getCurrentUserInfo, getRealWinner, tryAgain, getTarget,
+  Action, GetLocation, getCurrentUserInfo, getRealWinner, getTarget,
 } from '../actions/action';
 import AppComponent from '../components/App';
 
@@ -23,8 +23,9 @@ class App extends Component {
     return <AppComponent {...this.props} />
   }
 }
+
 const socket = socketio.connect('http://localhost:3001');
-// 192.168.0.53
+
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
@@ -52,11 +53,6 @@ const mapDispatchToProps = (dispatch) => {
     sendLocation: (location) => {
       socket.emit('location', location);
     },
-    // getOrder: (order) => {
-    //   socket.on('order', (count) => {
-    //     console.log(count);
-    //   });
-    // },
     getLocation: (location) => {
       dispatch(GetLocation(location));
     },

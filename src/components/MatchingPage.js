@@ -28,7 +28,7 @@ export default class MatchingPage extends Component {
     }
     return (
       <div className="matchingPage_background">
-        <div className="title__container">
+        {/* <div className="title__container">
           <span className="star white2"></span>
           <span className="star white2 on"></span>
           <span className="star white2"></span>
@@ -38,7 +38,7 @@ export default class MatchingPage extends Component {
           <span className="star white2"></span>
           <span className="star white2"></span>
           <span className="star white2 on"></span>
-        </div>
+        </div> */}
         <p className="matchingTitle neon">match!</p>
         <div className="matchedUser_wrapper">
           <div className="matchedUsers">
