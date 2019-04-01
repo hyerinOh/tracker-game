@@ -42,7 +42,6 @@ export default class SignInPage extends Component {
       //   latitude: 37.184631,
       //   longitude: 127.121022
       // }
-
       // this.props.requestRoom(userNameAndPhto);
       // this.props.history.push('/matching');
 

@@ -1,69 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 여기없대
+# Introduction
 
-## Available Scripts
+**여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다.
 
-In the project directory, you can run:
+## Requirements
+- Facebook 가입이 선행되어야 합니다.
+- Chrome Browser를 권장합니다.
 
-### `npm start`
+## Prerequisites
+- Node.js 설치
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Client
+```
+git clone https://github.com/hyerinOh/tracker-game.git
+cd tracker-game
+npm install
+npm start
+```
 
-### `npm test`
+### Server
+```
+git clone https://github.com/hyerinOh/tracker-game-server.git
+cd tracker-game-server
+npm install
+npm start
+```
+## Features
+- Facebook을 이용한 로그인 구현
+- geolocation을 이용하여 현재 위치(위도, 경도) 가져오기
+- Mapbox를 이용하여 지도와 마커 생성 기능 구현
+- Socket.IO를 이용한 실시간 양방향 통신 구현
+- Socket.IO를 이용한 방 생성과 방 제거 기능 구현
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Client-side
+- Babel을 통한 모던 자바스크립트 (ES2015+)
+- React를 사용한 컴포넌트 베이스 UI 아키텍처 구현
+- Redux 라이브러리를 사용한 state 관리
+- 실시간 양방향 소통을 위한 Socket.io
 
-### `npm run build`
+## Test
+- 자바스크립트 테스트 프레임워크 Jest, Enzyme
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
+### Client
+- Netlify
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# tracker-game
+## Version control
+- client, server의 독립적인 관리를 위한 GIT Repo 구분
+- Branch, Pull Request 기반 개발 진행
