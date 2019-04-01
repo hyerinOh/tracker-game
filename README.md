@@ -4,8 +4,6 @@
 **여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다. 
 만약 정답이 사용자가 입력한 값 보다 큰 숫자일 경우 'UP' 팝업이, 작을 경우 'DOWN' 팝업이 띄워지게 되며, 주어진 시간 안에 답을 맞추지 못할 경우 'Time out' 팝업이 띄워지게 됩니다. 상대방이 정답을 맞췄다면 'OO(상대방 이름) found your location' 팝업이 띄워지며, 맞춘 사용자에게는 'You found' 팝업이 띄워지게 됩니다.
 
-<img width="200" src="https://user-images.githubusercontent.com/38285577/55343236-a7256300-54e5-11e9-9d8b-782bac1fca74.png">
-
 ## Requirements
 - Facebook 가입이 선행되어야 합니다.
 - Chrome Browser를 권장합니다.
