@@ -7,9 +7,9 @@ ReactMapGL.accessToken = 'pk.eyJ1IjoiaHllbmluaWlpIiwiYSI6ImNqcWtubmw2dTZvM2Q0MnV
 export default class GamePage extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
+
     const { target } = this.props;
-    
+    const { time } = this.state;
     this.state = {
       viewport: {
         width: 640,
@@ -28,7 +28,7 @@ export default class GamePage extends Component {
       isTimeout: false,
       interval: setInterval(() => {
         this.setState({
-          time: this.state.time - 1
+          time: time - 1
         });
       }, 1000)
     };
@@ -53,13 +53,6 @@ export default class GamePage extends Component {
     }
   }
 
-  getTimeLimit(number) {
-    const minute = parseInt(number/60);
-    const second = (number % 60).toString().padStart(2, '0');
-
-    return minute + ':' + second;
-  }
-
   onTimeout() {
     const { time } = this.state;
 
@@ -67,7 +60,14 @@ export default class GamePage extends Component {
       this.setState({
         time: time - 1
       });
-    }, 1000)
+    }, 1000);
+  }
+
+  getTimeLimit(number) {
+    const minute = parseInt(number/60);
+    const second = (number % 60).toString().padStart(2, '0');
+
+    return minute + ':' + second;
   }
 
   handleFirst = (e) => {
@@ -105,7 +105,9 @@ export default class GamePage extends Component {
 
   distinguishCorrectAnswer() {
     const { first, second, third } = this.state;
-    const { target, getWinner, currUserInfo, distinguishWinner } = this.props;
+    const {
+      target, getWinner, currUserInfo, distinguishWinner
+    } = this.props;
     const strLat = target.location.latitude.toString();
     const realAnswer = Number(strLat.substring(strLat.length - 3, strLat.length));
 
@@ -117,6 +119,7 @@ export default class GamePage extends Component {
           isCorrectAnswer: true,
           isModalOpen: true,
         });
+
         getWinner(currUserInfo.name);
         distinguishWinner(currUserInfo.name);
       } else {
@@ -135,7 +138,7 @@ export default class GamePage extends Component {
         }
       }
     } else if (first.length === 0 || second.length === 0 || third.length === 0) {
-      alert('write answers!')
+      alert('write answers!');
     }
   }
 
@@ -159,7 +162,7 @@ export default class GamePage extends Component {
     if (time <= 0) {
       clearInterval(interval);
     }
-    
+
     return (
       <div>
         <div className="currUserWrapper">
@@ -173,8 +176,8 @@ export default class GamePage extends Component {
             <div>
               {
                 time === 0
-                ? <Modal {...this.props} isTimeout={true} />
-                : null
+                  ? <Modal {...this.props} isTimeout={true} />
+                  : null
               }
             </div>
           </div>
@@ -187,57 +190,56 @@ export default class GamePage extends Component {
           }}
           mapStyle="mapbox://styles/hyeniniii/cjsudcekl687d1flifo199qck"
         >
-          <Marker 
+          <Marker
             key={target.name}
             className="oppMarker"
             latitude={Number(target.location.latitude)}
             longitude={Number(target.location.longitude)}
             anchor="bottom"
-          >
-          </Marker>
+          />
         </ReactMapGL>
         <div className="quizWrapper">
           <div>
-          {
-            <div className="quiz">
-              <p className="given_longitude">{target.location.longitude}</p>
-              <div className="quiz-latitude">
-                <p className="given_latitude">{quizLat}</p>
-                <div className="answer-box">
-                  <input
-                    type="text"
-                    className="answer"
-                    maxLength="1"
-                    ref={(first) => this.first = first}
-                    value={first}
-                    onChange={this.handleFirst}
-                  />
-                  <div className="bubbly" />
-                </div>
-                <div className="answer-box">
-                  <input
-                    type="text"
-                    className="answer"
-                    maxLength="1"
-                    ref={(second) => this.second = second}
-                    value={second}
-                    onChange={this.handleSecond}
-                  />
-                  <div className="bubbly" />
-                </div>
-                <div className="answer-box">
-                  <input
-                    type="text"
-                    className="answer"
-                    maxLength="1"
-                    ref={(third) => this.third = third}
-                    value={third}
-                    onChange={this.handlethird}
-                  />
-                  <div className="bubbly" />
+            {
+              <div className="quiz">
+                <p className="given_longitude">{target.location.longitude}</p>
+                <div className="quiz-latitude">
+                  <p className="given_latitude">{quizLat}</p>
+                  <div className="answer-box">
+                    <input
+                      type="text"
+                      className="answer"
+                      maxLength="1"
+                      ref={(first) => this.first = first}
+                      value={first}
+                      onChange={this.handleFirst}
+                    />
+                    <div className="bubbly" />
+                  </div>
+                  <div className="answer-box">
+                    <input
+                      type="text"
+                      className="answer"
+                      maxLength="1"
+                      ref={(second) => this.second = second}
+                      value={second}
+                      onChange={this.handleSecond}
+                    />
+                    <div className="bubbly" />
+                  </div>
+                  <div className="answer-box">
+                    <input
+                      type="text"
+                      className="answer"
+                      maxLength="1"
+                      ref={(third) => this.third = third}
+                      value={third}
+                      onChange={this.handlethird}
+                    />
+                    <div className="bubbly" />
+                  </div>
                 </div>
               </div>
-            </div>
           }
             <button
               type="submit"
@@ -251,10 +253,11 @@ export default class GamePage extends Component {
         </div>
         {
           isModalOpen
-            ? <Modal {...this.props}
-                isCorrectAnswer={isCorrectAnswer}
-                isUpOrDown={isUpOrDown}
-                handleClose={this.handleClose.bind(this)}
+            ? <Modal
+              {...this.props}
+              isCorrectAnswer={isCorrectAnswer}
+              isUpOrDown={isUpOrDown}
+              handleClose={this.handleClose.bind(this)}
               />
             : null
         }

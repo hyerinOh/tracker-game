@@ -13,14 +13,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { socket } = this.props;
+    const { socket, getLocation } = this.props;
 
     socket.on('quiz', (opponentLoc) => {
-      this.props.getLocation(opponentLoc);
+      getLocation(opponentLoc);
     });
   }
+
   render() {
-    return <AppComponent {...this.props} />
+    return <AppComponent {...this.props} />;
   }
 }
 
@@ -64,7 +65,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     getTarget: () => {
       socket.on('target', (target) => {
-        console.log('ttttttt', target)
         dispatch(getTarget(target));
       });
     },

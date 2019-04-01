@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import background from './screen.png';
 
 export default class SignInPage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.auth = this.auth.bind(this);
@@ -11,12 +11,12 @@ export default class SignInPage extends Component {
 
   auth() {
     const config = {
-      apiKey: "AIzaSyB73ueN7dSfWwN5hA9vKobhjcRJMbuDeTY",
-      authDomain: "tracker-game2.firebaseapp.com",
-      databaseURL: "https://tracker-game2.firebaseio.com",
-      projectId: "tracker-game2",
-      storageBucket: "tracker-game2.appspot.com",
-      messagingSenderId: "432417324683"
+      apiKey: 'AIzaSyB73ueN7dSfWwN5hA9vKobhjcRJMbuDeTY',
+      authDomain: 'tracker-game2.firebaseapp.com',
+      databaseURL: 'https://tracker-game2.firebaseio.com',
+      projectId: 'tracker-game2',
+      storageBucket: 'tracker-game2.appspot.com',
+      messagingSenderId: '432417324683'
     };
 
     !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
@@ -28,9 +28,7 @@ export default class SignInPage extends Component {
     firebase.auth().languageCode = 'ko_KR';
 
     firebase.auth().signInWithPopup(provider).then((result) => {
-      const token = result.credential.accessToken;  
       // geolocation 안 될 때
-
       // const user = result.user;
       // const currUser = {};
       // currUser.name = user.displayName;
@@ -77,6 +75,7 @@ export default class SignInPage extends Component {
       const errorMessage = error.message;
       const email = error.email;
       const credential = error.credential;
+      console.log(errorMessage);
     });
 
     firebase.auth().getRedirectResult().then((result) => {
@@ -89,6 +88,7 @@ export default class SignInPage extends Component {
       var errorMessage = error.message;
       var email = error.email;
       var credential = error.credential;
+      console.log(errorMessage);
     });
   }
 
@@ -96,10 +96,12 @@ export default class SignInPage extends Component {
     return (
       <div className="signIn_wrapper">
         <img
-          className="mainImage" 
+          className="mainImage"
           src={background}
+          alt="mainImage"
         />
-        <button 
+        <button
+          type="submit"
           className="signInBtn"
           onClick={this.auth.bind(this)}
         >
