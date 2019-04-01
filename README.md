@@ -75,8 +75,8 @@ npm start
 
 - 정답을 맞췄을 경우
 <div>
-    <img width="200" src="https://user-images.githubusercontent.com/38285577/55344386-1f8d2380-54e8-11e9-820c-cb9b35154869.png">
-    <img width="200" src="https://user-images.githubusercontent.com/38285577/55344398-2b78e580-54e8-11e9-88f8-40f9ec587094.png">
+    <img width="200" height="300" src="https://user-images.githubusercontent.com/38285577/55344386-1f8d2380-54e8-11e9-820c-cb9b35154869.png">
+    <img width="200" height="300" src="https://user-images.githubusercontent.com/38285577/55344398-2b78e580-54e8-11e9-88f8-40f9ec587094.png">
 </div>
 
 
