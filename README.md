@@ -4,9 +4,12 @@
 **여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다. 
 만약 정답이 사용자가 입력한 값 보다 큰 숫자일 경우 'UP' 팝업이, 작을 경우 'DOWN' 팝업이 띄워지게 되며, 주어진 시간 안에 답을 맞추지 못할 경우 'Time out' 팝업이 띄워지게 됩니다. 상대방이 정답을 맞췄다면 'OO(상대방 이름) found your location' 팝업이 띄워지며, 맞춘 사용자에게는 'You found' 팝업이 띄워지게 됩니다.
 
+<<<<<<< HEAD
 ![여기없대](https://user-images.githubusercontent.com/38285577/55370436-6b19ee80-5535-11e9-9473-0e956ff83c0b.gif)
 
 
+=======
+>>>>>>> d4ca8273d9819ccc4b00909b151aff707e9f9d0a
 ## Requirements
 - Facebook 가입이 선행되어야 합니다.
 - Chrome Browser를 권장합니다.
@@ -80,8 +83,8 @@ npm start
 
 - 정답을 맞췄을 경우
 <div>
-    <img width="200" src="https://user-images.githubusercontent.com/38285577/55344386-1f8d2380-54e8-11e9-820c-cb9b35154869.png">
-    <img width="200" src="https://user-images.githubusercontent.com/38285577/55344398-2b78e580-54e8-11e9-88f8-40f9ec587094.png">
+    <img width="200" height="300" src="https://user-images.githubusercontent.com/38285577/55344386-1f8d2380-54e8-11e9-820c-cb9b35154869.png">
+    <img width="200" height="300" src="https://user-images.githubusercontent.com/38285577/55344398-2b78e580-54e8-11e9-88f8-40f9ec587094.png">
 </div>
 
 ## Sincere Thanks
