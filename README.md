@@ -1,4 +1,4 @@
-# 여기없대
+# 여기없대 (mobile web)
 # Introduction
 
 **여기없대**는 **Facebook 로그인** 기능을 기반으로 **Mapbox**와 **geolocation**을 이용한 간단한 위치 맞추기 게임입니다. 
